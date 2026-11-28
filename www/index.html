@@ -248,10 +248,10 @@ function vSettings(){const k=S.seller;
   <label>نشانه فاکتورهای این گوشی (مثلاً الف برای مسئول، ب برای بازو)</label><input id="s5" value="${esc(S.pfx)}">
   <div class="btns"><button class="b" onclick="saveSeller()">ذخیره</button></div></div>
   <div class="card"><div class="t">فهرست نشریات از اکسل</div><div class="m">ابتدا قالب اکسل را بگیرید و نام، شرح، قیمت، موجودی و حداقل موجودی را پر کنید. بعد فایل را اینجا انتخاب کنید. نشریه هم‌نام به‌روز می‌شود و نشریه جدید اضافه می‌شود.</div>
-  <div class="btns"><button class="b o" onclick="tplXlsx()">دریافت قالب اکسل</button><button class="b o" onclick="expList()">خروجی فهرست نشریات</button></div><input type="file" accept=".xlsx,.xls,.csv" onchange="impXlsx(this)"></div>
+  <div class="btns"><button class="b o" onclick="tplXlsx()">دریافت قالب اکسل</button><button class="b o" onclick="expList()">خروجی فهرست نشریات</button></div><input type="file" onchange="impXlsx(this)"></div>
   <div class="card"><div class="t">همگام‌سازی با بازوی نشریات</div><div class="m">با «ارسال تغییرات»، فهرست پیام‌رسان‌ها باز می‌شود. طرف مقابل آن را دریافت و «ادغام» می‌کند. فاکتورها و شارژهای هر دو نفر کنار هم ثبت می‌شوند و تکراری ثبت نمی‌شود. اطلاعات فروشنده منتقل نمی‌شود. فایل شامل نام و تلفن خریداران است.</div>
   <div class="btns"><button class="b" onclick="expFile()">ارسال تغییرات</button><button class="b o" onclick="shareData()">ارسال به‌صورت متن</button></div>
-  <label>دریافت تغییرات از فایل</label><input type="file" accept=".json,application/json,text/plain" onchange="impFile(this)">
+  <label>دریافت تغییرات از فایل</label><input type="file" onchange="impFile(this)">
   <div class="btns"><button class="b o" onclick="impText()">دریافت از متن چسبانده‌شده</button></div></div>`;
 }
 function saveSeller(){
