@@ -119,21 +119,18 @@ const cancelled=e=>e&&(e.name==='AbortError'||/cancel/i.test(String(e.message||e
 async function nShare(o){const P=CAP&&CAP.Plugins&&CAP.Plugins.Share;if(NATIVE&&P){await P.share(o);return true}return false}
 const KEY='aa_publications_v1';
 let S=null,tab='books',cart={};
+const DEF=[["الکلی های گمنام کوچک (جلد ساده)","کتاب",110000,0],["الکلی های گمنام متوسط ( جلد ساده )","کتاب",230000,0],["الکلی های گمنام وزیری (بزرگ ساده)","کتاب",280000,0],["الکلی های گمنام متوسط (جلد چرمی)","کتاب",350000,0],["الکلی هام گمنام کوچک ( جلد چرمی )","کتاب",250000,0],["دوازده قدم- دوازده سنت جدید (جلد ساده)","کتاب",230000,0],["هوشیار زیستن (جلد ساده)","کتاب",200000,0],["به باور رسیدن (جلد ساده)","کتاب",200000,0],["انجمن از دیدگاه بیل جیبی (ساده)","کتاب",120000,0],["بازتاب های روزانه ( جلد ساده)","کتاب",120000,0],["تجربه، نیرو، امید (جلد ساده)","کتاب",350000,0],["دکتر باب و پیشکسوتان (جلد ساده)","کتاب",380000,0],["الکلی های گمنام بالغ می شود (جلد ساده)","کتاب",500000,0],["زبان دل (جلد ساده)","کتاب",550000,0],["راهنمای خدمات انجمن (ساده)","کتاب",500000,0],["بزرگترین مسئولیت ما","کتاب",250000,0],["داستان پیدایش سنت های الکلی های گمنام","کتابچه",20000,0],["دوازده مفهوم برای خدمات جهانی","پمفلت خدماتی",10000,0],["سه گفتگو با جامعه پزشکی","کتابچه",100000,0],["یک تازه وارد می پرسد","پمفلت بهبودی",15000,0],["خوش آمدگو","پمفلت بهبودی",10000,0],["پنفلت هوشیار زیستن","پمفلت بهبودی",23000,0],["پرسش و پاسخ درباره راهنما","پمفلت بهبودی",30000,0],["آیا شما فکر میکنید متفاوت هستید ؟","پمفلت بهبودی",20000,0],["دارو در الکلی های گمنام","پمفلت بهبودی",10000,0],["راه های بسیار برای معنویت","پمفلت بهبودی",10000,0],["دیدگاه یک عضو نسبت به انجمن","پمفلت بهبودی",20000,0],["آیا در زندگی شما فرد الکلی وجود دارد ؟","پمفلت بهبودی",30000,0],["این الکلی های گمنام است","پمفلت بهبودی",30000,0],["چهل و چهار سؤال ( سوالات رایج )","پمفلت بهبودی",40000,0],["مقاله جک الکساندر","پمفلت بهبودی",15000,0],["آیا جمعیت الکلی های گمنام برای من است ؟","پمفلت بهبودی",30000,0],["آیا در محل کار شما الکلی وجود دارد ؟","پمفلت بهبودی",10000,0],["دوازده قدم در قالب تصویر","پمفلت بهبودی",10000,0],["جوانان در انجمن ( انجمن و جوانان )","پمفلت بهبودی",100000,0],["خیلی جوان","پمفلت بهبودی",40000,0],["پیامی برای نوجوانان","پمفلت بهبودی",15000,0],["انجمن برای الکلی های مسن هیچ وقت دیر نیست","پمفلت بهبودی",55000,0],["انجمن الکلی های گمنام برای بانوان","پمفلت بهبودی",35000,0],["انجمن برای الکلی های دارای نیازهای خاص","پمفلت بهبودی",10000,0],["گروه الکلی های گمنام (کتابچه گروه)","پمفلت خدماتی",35000,0],["تاریخچه کتاب الکلی های گمنام","پمفلت خدماتی",10000,0],["دوازده سنت در قالب تصویر","پمفلت خدماتی",10000,0],["موضوعات پیشنهادی برای بحث در جلسات","پمفلت خدماتی",6000,0],["درک مفهوم گمنامی","پمفلت خدماتی",10000,0],["خودیاری","پمفلت خدماتی",10000,0],["پنفلت خزانه دار گروه","پمفلت خدماتی",10000,0],["نماینده خدمات عمومی GSR","پمفلت خدماتی",20000,0],["مشارکت کردن در جلسات غیر از AA","پمفلت خدماتی",10000,0],["میراث خدماتی انجمن","پمفلت خدماتی",30000,0],["گریپ واین انجمن ولاوینا ( جلسات چاپی ما )","پمفلت خدماتی",10000,0],["چرخه عشق و خدمت","پمفلت خدماتی",10000,0],["پمفلت با دوستانمان صمیمی باشیم","پمفلت خدماتی",10000,0],["کتابچه معرفی نشریات (جدید)","پمفلت خدماتی",45000,0],["نحوه برگزاری یک جلسه تبادل نظر","پمفلت خدماتی",10000,0],["انجمن چه هست و چه نیست ؟","پمفلت خدماتی",10000,0],["اگر شما متخصص هستید ؟","پمفلت خدماتی",10000,0],["دستورالعمل های انجمن بایگانی","پمفلت خدماتی",10000,0],["دستورالعمل های انجمن اینترنت","پمفلت خدماتی",30000,0],["دستورالعمل های انجمن امور مالی","پمفلت خدماتی",30000,0],["دستورالعمل های انجمن همایش ها ، نشست ها و گرده همایی ها","پمفلت خدماتی",30000,0],["دفتر منشی جلسات بهبودی","دفتر اداری",500000,0],["دفتر منشی جلسات اداری","دفتر اداری",500000,0],["دفتر خزانه داری گروه","دفتر اداری",500000,0],["جلد فرمت جلسات (پک 7 عددی )","دفتر اداری",1750000,0],["کتاب کار اطلاعات عمومی","کتاب کار",160000,0],["مجله مسیر هوشیاری","مجله",90000,0],["دعا سایز کوچک","دعا",400,0],["دعای آرامش","دعا",25000,0],["دعای قدم سوم","دعا",25000,0],["دعای قدم هفتم","دعا",25000,0],["دعای قدم یازده","دعا",25000,0],["برگه تراز قدم 4 (رنجش)","برگه تراز",7000,0],["برگه تراز قدم 4 (ترس)","برگه تراز",7000,0],["برگه تراز قدم 4 (روابط خصوصی)","برگه تراز",7000,0]];
 function load(){
   try{const r=localStorage.getItem(KEY);if(r)S=JSON.parse(r)}catch(e){}
   if(!S){
-    S={books:[
-      {id:1,name:'کتاب بزرگ',desc:'متن اصلی برنامه انجمن',price:3000000,stock:12,min:5},
-      {id:2,name:'دوازده قدم و دوازده سنت',desc:'شرح قدم‌ها و سنت‌ها',price:2000000,stock:4,min:5},
-      {id:3,name:'یک روز در یک زمان',desc:'مطالعه روزانه',price:1000000,stock:20,min:8}],
-      sales:[],start:0,seq:1,bid:4};
-    S.start=S.books.reduce((a,b)=>a+b.stock*b.price,0);
+    S={books:DEF.map((r,i)=>({id:'d'+(i+1),name:r[0],desc:r[1],price:r[2],stock:0,min:r[3],base:0,rs:[],t:0})),sales:[],start:0,seq:1,bid:1};
   }
 }
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 const low=b=>b.stock<=b.min;
 const purchSpent=()=>S.purch.filter(o=>o.status==='received').reduce((a,o)=>a+o.rtotal,0);
-const cash=()=>S.sales.reduce((a,s)=>a+s.total,0)-purchSpent();
+const salesTot=()=>S.sales.reduce((a,s)=>a+s.total,0);
+const cash=()=>(S.cash0||0)+salesTot()-purchSpent();
 const inv=()=>S.books.reduce((a,b)=>a+b.stock*b.price,0);
 const qs={books:'',sale:'',purchase:''};
 const norm=s=>String(s||'').replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[\u200c\s]/g,'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).toLowerCase();
@@ -163,7 +160,7 @@ function vBooks(){
   const l=mb('books').map(b=>`<div class="card ${low(b)?'low':''}">
     <div class="row"><span class="t">${esc(b.name)}</span><span class="badge">موجودی: ${fa(b.stock)}</span></div>
     <div class="m">${esc(b.desc)}</div>
-    <div class="row"><span>${fa(b.price)} ریال</span><span class="m">حداقل موجودی: ${fa(b.min)}</span></div>
+    <div class="row"><span>${fa(b.price)} تومان</span><span class="m">حداقل موجودی: ${fa(b.min)}</span></div>
     ${low(b)?'<div class="warn">موجودی کم است. این کتاب را سفارش دهید و انبار را شارژ کنید.</div>':''}
     <div class="btns"><button class="b" onclick="restock('${b.id}')">شارژ انبار</button><button class="b o" onclick="editBook('${b.id}')">ویرایش</button></div></div>`).join('');
   return `<div class="btns" style="margin:0 0 10px"><button class="b" onclick="editBook(0)">+ کتاب جدید</button></div>`+sq('books')+'<div id="lst">'+(l||'<div class="empty">'+(qs.books?'نشریه‌ای پیدا نشد.':'هنوز نشریه‌ای ثبت نشده.')+'</div>')+'</div>';
@@ -171,23 +168,24 @@ function vBooks(){
 function vSale(){
   const items=S.books.filter(b=>cart[b.id]>0);
   const total=items.reduce((a,b)=>a+cart[b.id]*b.price,0);
-  const l=mb('sale').map(b=>`<div class="card"><div class="row"><div><div class="t">${esc(b.name)}</div><div class="m">${fa(b.price)} ریال | موجودی ${fa(b.stock)}</div></div>
+  const l=mb('sale').map(b=>`<div class="card"><div class="row"><div><div class="t">${esc(b.name)}</div><div class="m">${fa(b.price)} تومان | موجودی ${fa(b.stock)}</div></div>
     <div class="qty"><button onclick="qty('${b.id}',-1)">−</button><b>${fa(cart[b.id]||0)}</b><button onclick="qty('${b.id}',1)">+</button></div></div></div>`).join('');
-  return `<div class="card"><div class="t">مشخصات خریدار (الزامی)</div><label>نام و نام خانوادگی</label><input value="${esc(buyer.name)}" oninput="buyer.name=this.value"><label>شماره تلفن</label><input inputmode="tel" value="${esc(buyer.phone)}" oninput="buyer.phone=this.value"></div>`+sq('sale')+'<div id="lst">'+l+'</div>'+`<div class="sum"><div class="row"><span>جمع فاکتور</span><span class="big">${fa(total)} ریال</span></div>
+  return `<div class="card"><div class="t">مشخصات خریدار (الزامی)</div><label>نام و نام خانوادگی</label><input value="${esc(buyer.name)}" oninput="buyer.name=this.value"><label>شماره تلفن</label><input inputmode="tel" value="${esc(buyer.phone)}" oninput="buyer.phone=this.value"></div>`+sq('sale')+'<div id="lst">'+l+'</div>'+`<div class="sum"><div class="row"><span>جمع فاکتور</span><span class="big">${fa(total)} تومان</span></div>
     <div class="btns"><button class="b" style="flex:1" ${total?'':'disabled style="opacity:.4;flex:1"'} onclick="sell()">صدور فاکتور</button></div></div>`;
 }
 function vInvoices(){
   if(!S.sales.length)return '<div class="empty">هنوز فاکتوری صادر نشده است.</div>';
-  return [...S.sales].reverse().map(s=>`<div class="card" onclick="showInv('${s.id}')" style="cursor:pointer"><div class="row"><span class="t">فاکتور ${esc(s.no)} | ${esc((s.buyer||{}).name||'')}</span><span>${fa(s.total)} ریال</span></div><div class="m">${esc(s.date)}</div></div>`).join('');
+  return [...S.sales].reverse().map(s=>`<div class="card" onclick="showInv('${s.id}')" style="cursor:pointer"><div class="row"><span class="t">فاکتور ${esc(s.no)} | ${esc((s.buyer||{}).name||'')}</span><span>${fa(s.total)} تومان</span></div><div class="m">${esc(s.date)}</div></div>`).join('');
 }
 function vReport(){
-  const c=cash(),i=inv(),diff=c+i-S.start,lows=S.books.filter(low);
-  return `<div class="card"><div class="m">موجودی صندوق (فروش‌ها منهای خریدها)</div><div class="big" style="color:var(--gn)">${fa(c)} ریال</div><div class="m">جمع فروش: ${fa(c+purchSpent())} | جمع خرید: ${fa(purchSpent())}</div></div>
-  <div class="card"><div class="m">ارزش ریالی کتاب‌های موجود در انبار</div><div class="big" style="color:var(--pr)">${fa(i)} ریال</div></div>
-  <div class="card"><div class="m">مجموع صندوق و انبار</div><div class="big">${fa(c+i)} ریال</div>
-  <div class="m">اختلاف با تنخواه اولیه: ${diff>=0?'+':'−'}${fa(Math.abs(diff))} ریال</div></div>
-  <div class="card"><div class="m">تنخواه اولیه (ارزش کتاب‌های اول دوره)</div><div class="big">${fa(S.start)} ریال</div>
+  const c=cash(),i=inv(),diff=c+i-S.start-(S.cash0||0),lows=S.books.filter(low);
+  return `<div class="card"><div class="m">موجودی صندوق (فروش‌ها منهای خریدها)</div><div class="big" style="color:var(--gn)">${fa(c)} تومان</div><div class="m">نقدی اول دوره: ${fa(S.cash0||0)} | جمع فروش: ${fa(salesTot())} | جمع خرید: ${fa(purchSpent())}</div></div>
+  <div class="card"><div class="m">ارزش پولی کتاب‌های موجود در انبار</div><div class="big" style="color:var(--pr)">${fa(i)} تومان</div></div>
+  <div class="card"><div class="m">مجموع صندوق و انبار</div><div class="big">${fa(c+i)} تومان</div>
+  <div class="m">اختلاف با تنخواه اولیه: ${diff>=0?'+':'−'}${fa(Math.abs(diff))} تومان</div></div>
+  <div class="card"><div class="m">تنخواه اولیه (ارزش کتاب‌های اول دوره)</div><div class="big">${fa(S.start)} تومان</div>
   <div class="btns"><button class="b o" onclick="editStart()">تغییر تنخواه اولیه</button></div></div>
+  <div class="card"><div class="m">موجودی نقدی اول دوره (پول نقد از فروش‌های قبل)</div><div class="big">${fa(S.cash0||0)} تومان</div><div class="btns"><button class="b o" onclick="editCash0()">ثبت یا تغییر</button></div></div>
   <div class="card ${lows.length?'low':''}"><div class="t">کتاب‌های نیازمند سفارش</div>${lows.length?lows.map(b=>`<div class="row"><span>${esc(b.name)}</span><span class="badge">${fa(b.stock)} از ${fa(b.min)}</span></div>`).join(''):'<div class="m">همه کتاب‌ها موجودی کافی دارند.</div>'}</div>
   ${rptCard()}<div class="btns"><button class="b r" onclick="resetAll()">پاک‌کردن همه داده‌ها</button></div>`;
 }
@@ -209,7 +207,7 @@ function invHTML(s,scr){
   <div class="irow"><span>شماره: ${esc(s.no)}</span><span>${esc(s.date)}</span></div>
   <div class="ibl"><b>خریدار:</b> ${esc(b.name)}<br>تلفن: <span dir="ltr">${esc(b.phone)}</span></div>
   <table><tr><th>عنوان</th><th>تعداد</th><th>قیمت</th><th>جمع</th></tr>${s.items.map(i=>`<tr><td>${esc(i.name)}</td><td>${fa(i.qty)}</td><td>${fa(i.price)}</td><td>${fa(i.qty*i.price)}</td></tr>`).join('')}</table>
-  <div class="itot">مبلغ قابل پرداخت: ${fa(s.total)} ریال</div>
+  <div class="itot">مبلغ قابل پرداخت: ${fa(s.total)} تومان</div>
   <div class="ibl"><b>فروشنده (مسئول نشریات):</b> ${esc(k.name||'')}${k.unit?'<br>واحد: '+esc(k.unit):''}<br>تلفن: <span dir="ltr">${esc(k.phone||'')}</span><br>شماره کارت: <b dir="ltr">${fmtCard(k.card)}</b> ${scr&&k.card?`<button class="b nocap" style="padding:1px 10px" onclick="copyText('${k.card}','شماره کارت کپی شد')">کپی</button>`:''}${k.sheba?`<br>شماره شبا: <b dir="ltr">${esc(k.sheba)}</b>`:''}</div></div>`;
 }
 function showInv(id){
@@ -217,7 +215,7 @@ function showInv(id){
   open(invHTML(s,true)+`<div class="btns"><button class="b" onclick="shareText('${id}')">ارسال متن</button><button class="b" onclick="shareImg('${id}')">عکس</button><button class="b" onclick="sharePdf('${id}')">PDF</button><button class="b o" onclick="closeM()">بستن</button></div><p class="m">برای کپی‌شدن شماره کارت در پیام‌رسان، «ارسال متن» را بزنید.</p>`);
 }
 function invText(s){const k=s.seller||{},b=s.buyer||{};
-  return `فاکتور نشریات انجمن الکلی‌های گمنام${k.unit?' - '+k.unit:''}\nشماره ${s.no} | ${s.date}\nخریدار: ${b.name} | ${b.phone}\n`+s.items.map(i=>`- ${i.name} × ${i.qty} = ${i.qty*i.price}`).join('\n')+`\nمبلغ قابل پرداخت: ${s.total} ریال\n\nشماره کارت: ${k.card}\nبه نام: ${k.name}${k.sheba?'\nشبا: '+k.sheba:''}\nتلفن: ${k.phone}`}
+  return `فاکتور نشریات انجمن الکلی‌های گمنام${k.unit?' - '+k.unit:''}\nشماره ${s.no} | ${s.date}\nخریدار: ${b.name} | ${b.phone}\n`+s.items.map(i=>`- ${i.name} × ${i.qty} = ${i.qty*i.price}`).join('\n')+`\nمبلغ قابل پرداخت: ${s.total} تومان\n\nشماره کارت: ${k.card}\nبه نام: ${k.name}${k.sheba?'\nشبا: '+k.sheba:''}\nتلفن: ${k.phone}`}
 function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',3800)}
 function copyText(t,msg){
   const ok=()=>toast(msg||'کپی شد');
@@ -250,7 +248,7 @@ function vSettings(){const k=S.seller;
   <label>نشانه فاکتورهای این گوشی (مثلاً الف برای مسئول، ب برای بازو)</label><input id="s5" value="${esc(S.pfx)}">
   <div class="btns"><button class="b" onclick="saveSeller()">ذخیره</button></div></div>
   <div class="card"><div class="t">فهرست نشریات از اکسل</div><div class="m">ابتدا قالب اکسل را بگیرید و نام، شرح، قیمت، موجودی و حداقل موجودی را پر کنید. بعد فایل را اینجا انتخاب کنید. نشریه هم‌نام به‌روز می‌شود و نشریه جدید اضافه می‌شود.</div>
-  <div class="btns"><button class="b o" onclick="tplXlsx()">دریافت قالب اکسل</button></div><input type="file" accept=".xlsx,.xls,.csv" onchange="impXlsx(this)"></div>
+  <div class="btns"><button class="b o" onclick="tplXlsx()">دریافت قالب اکسل</button><button class="b o" onclick="expList()">خروجی فهرست نشریات</button></div><input type="file" accept=".xlsx,.xls,.csv" onchange="impXlsx(this)"></div>
   <div class="card"><div class="t">همگام‌سازی با بازوی نشریات</div><div class="m">با «ارسال تغییرات»، فهرست پیام‌رسان‌ها باز می‌شود. طرف مقابل آن را دریافت و «ادغام» می‌کند. فاکتورها و شارژهای هر دو نفر کنار هم ثبت می‌شوند و تکراری ثبت نمی‌شود. اطلاعات فروشنده منتقل نمی‌شود. فایل شامل نام و تلفن خریداران است.</div>
   <div class="btns"><button class="b" onclick="expFile()">ارسال تغییرات</button><button class="b o" onclick="shareData()">ارسال به‌صورت متن</button></div>
   <label>دریافت تغییرات از فایل</label><input type="file" accept=".json,application/json,text/plain" onchange="impFile(this)">
@@ -291,6 +289,7 @@ function applyImp(merge){
     const pr={pending:0,void:1,received:2},pm=new Map(S.purch.map(o=>[o.k,o]));
     (d.purch||[]).forEach(o=>{const m=pm.get(o.k);if(!m){S.purch.push(o);return}if(pr[o.status]>pr[m.status]||(pr[o.status]===pr[m.status]&&(o.t||0)>(m.t||0)))Object.assign(m,o)});
     if((d.startT||0)>(S.startT||0)){S.start=d.start;S.startT=d.startT}
+    if((d.cash0T||0)>(S.cash0T||0)){S.cash0=d.cash0;S.cash0T=d.cash0T}
   }else{const k=S.seller,p=S.pfx,q=S.seq,ps=S.pseq;S=d;S.seller=k;S.pfx=p;S.seq=q||1;S.pseq=ps||1}
   if(pendC)try{const m=JSON.parse(localStorage.getItem('aa_imp')||'{}');if(!m[pendC[0]]||codeCmp(pendC[1],m[pendC[0]])>0)m[pendC[0]]=pendC[1];localStorage.setItem('aa_imp',JSON.stringify(m))}catch(e){}
   pend=null;save();closeM();render();toast(merge?'ادغام انجام شد.':'داده‌ها جایگزین شد.');
@@ -304,13 +303,13 @@ const pget=id=>S.purch.find(o=>o.id===id);
 function pq(id,d){pcart[id]=Math.max(0,(pcart[id]||0)+d);render()}
 function vPurchase(){
   const pend=S.purch.filter(o=>o.status==='pending'),done=S.purch.filter(o=>o.status==='received').reverse();
-  const pl=pend.map(o=>`<div class="card"><div class="row"><span class="t">${esc(o.no)}</span><span>${fa(o.total)} ریال</span></div><div class="m">${esc(o.date)} | ${fa(o.items.length)} عنوان | در انتظار دریافت</div><div class="btns"><button class="b" onclick="recvForm('${o.id}')">دریافت کالا</button><button class="b o" onclick="editPO('${o.id}')">اصلاح</button><button class="b o" onclick="showPO('${o.id}')">نمایش و ارسال</button><button class="b r" onclick="voidPO('${o.id}')">لغو</button></div></div>`).join('');
-  const rows=mb('purchase').map(b=>`<div class="card"><div class="row"><div><div class="t">${esc(b.name)}</div><div class="m">${fa(b.price)} ریال | موجودی ${fa(b.stock)}${low(b)?' | نیاز به سفارش':''}</div></div><div class="qty"><button onclick="pq('${b.id}',-1)">−</button><b>${fa(pcart[b.id]||0)}</b><button onclick="pq('${b.id}',1)">+</button></div></div></div>`).join('');
-  const hist=done.map(o=>`<div class="card" onclick="showPO('${o.id}')" style="cursor:pointer"><div class="row"><span class="t">${esc(o.no)}</span><span>${fa(o.rtotal)} ریال</span></div><div class="m">دریافت‌شده: ${esc(o.rdate)}</div></div>`).join('');
-  return `<div class="card"><div class="m">موجودی نقدی صندوق (سقف خرید)</div><div class="big" style="color:var(--gn)">${fa(cash())} ریال</div></div>`
+  const pl=pend.map(o=>`<div class="card"><div class="row"><span class="t">${esc(o.no)}</span><span>${fa(o.total)} تومان</span></div><div class="m">${esc(o.date)} | ${fa(o.items.length)} عنوان | در انتظار دریافت</div><div class="btns"><button class="b" onclick="recvForm('${o.id}')">دریافت کالا</button><button class="b o" onclick="editPO('${o.id}')">اصلاح</button><button class="b o" onclick="showPO('${o.id}')">نمایش و ارسال</button><button class="b r" onclick="voidPO('${o.id}')">لغو</button></div></div>`).join('');
+  const rows=mb('purchase').map(b=>`<div class="card"><div class="row"><div><div class="t">${esc(b.name)}</div><div class="m">${fa(b.price)} تومان | موجودی ${fa(b.stock)}${low(b)?' | نیاز به سفارش':''}</div></div><div class="qty"><button onclick="pq('${b.id}',-1)">−</button><b>${fa(pcart[b.id]||0)}</b><button onclick="pq('${b.id}',1)">+</button></div></div></div>`).join('');
+  const hist=done.map(o=>`<div class="card" onclick="showPO('${o.id}')" style="cursor:pointer"><div class="row"><span class="t">${esc(o.no)}</span><span>${fa(o.rtotal)} تومان</span></div><div class="m">دریافت‌شده: ${esc(o.rdate)}</div></div>`).join('');
+  return `<div class="card"><div class="m">موجودی نقدی صندوق (سقف خرید)</div><div class="big" style="color:var(--gn)">${fa(cash())} تومان</div></div>`
    +(pend.length?`<div class="t" style="margin:6px 0">درخواست‌های در انتظار دریافت</div>`+pl:'')
    +`<div class="t" style="margin:10px 0 6px">${editP?'اصلاح درخواست '+esc(pget(editP).no):'درخواست خرید جدید'}</div>`+sq('purchase')+'<div id="lst">'+rows+'</div>'
-   +`<div class="sum"><div class="row"><span>جمع درخواست</span><span class="big">${fa(pTot())} ریال</span></div><div class="btns"><button class="b" style="flex:1" onclick="issuePO()">${editP?'ذخیره اصلاحات':'صدور درخواست خرید'}</button>${editP?'<button class="b o" onclick="cancelEdit()">انصراف</button>':''}</div></div>`
+   +`<div class="sum"><div class="row"><span>جمع درخواست</span><span class="big">${fa(pTot())} تومان</span></div><div class="btns"><button class="b" style="flex:1" onclick="issuePO()">${editP?'ذخیره اصلاحات':'صدور درخواست خرید'}</button>${editP?'<button class="b o" onclick="cancelEdit()">انصراف</button>':''}</div></div>`
    +(done.length?`<div class="t" style="margin:14px 0 6px">خریدهای دریافت‌شده</div>`+hist:'');
 }
 function issuePO(){
@@ -332,14 +331,14 @@ function poHTML(o){
   <div class="irow"><span>شماره: ${esc(o.no)}</span><span>${esc(o.date)}</span></div>
   <div class="ibl"><b>درخواست‌کننده (مسئول نشریات):</b> ${esc(o.by||k.name)}<br>تلفن: <span dir="ltr">${esc(k.phone)}</span></div>
   <table><tr><th>عنوان</th><th>تعداد</th><th>قیمت</th><th>جمع</th></tr>${items.map(i=>`<tr><td>${esc(i.name)}</td><td>${fa(i.qty)}</td><td>${fa(i.price)}</td><td>${fa(i.qty*i.price)}</td></tr>`).join('')}</table>
-  <div class="itot">جمع کل: ${fa(tot)} ریال</div><div class="ibl">وضعیت: ${rec?'دریافت شده ('+esc(o.rdate)+')':'در انتظار دریافت'}</div></div>`;
+  <div class="itot">جمع کل: ${fa(tot)} تومان</div><div class="ibl">وضعیت: ${rec?'دریافت شده ('+esc(o.rdate)+')':'در انتظار دریافت'}</div></div>`;
 }
 function showPO(id){const o=pget(id);open(poHTML(o)+`<div class="btns"><button class="b" onclick="sharePO('${id}')">ارسال متن</button><button class="b" onclick="shareImg('${id}')">عکس</button><button class="b" onclick="sharePdf('${id}')">PDF</button><button class="b o" onclick="closeM()">بستن</button></div>`)}
 async function sharePO(id){const o=pget(id),rec=o.status==='received',it=rec?o.rec:o.items;
-  const t=`درخواست خرید نشریات انجمن الکلی‌های گمنام${S.seller.unit?' - '+S.seller.unit:''}\nشماره ${o.no} | ${o.date}\nدرخواست‌کننده: ${o.by||''} | ${S.seller.phone}\n`+it.map(i=>`- ${i.name} × ${i.qty}`).join('\n')+`\nجمع: ${rec?o.rtotal:o.total} ریال`;
+  const t=`درخواست خرید نشریات انجمن الکلی‌های گمنام${S.seller.unit?' - '+S.seller.unit:''}\nشماره ${o.no} | ${o.date}\nدرخواست‌کننده: ${o.by||''} | ${S.seller.phone}\n`+it.map(i=>`- ${i.name} × ${i.qty}`).join('\n')+`\nجمع: ${rec?o.rtotal:o.total} تومان`;
   try{if(await nShare({text:t,dialogTitle:'ارسال با...'}))return;if(navigator.share){await navigator.share({text:t});return}}catch(e){if(cancelled(e))return}copyText(t,'متن کپی شد.')}
 function recvForm(id){const o=pget(id);
-  open(`<h3 style="margin:0">دریافت کالا: ${esc(o.no)}</h3><p class="m">تعداد واقعی دریافتی هر کتاب را وارد کنید. کتاب‌هایی که نرسیده را صفر بگذارید.</p>`+o.items.map((i,n)=>`<div class="row" style="margin:6px 0"><span>${esc(i.name)}<br><span class="m">${fa(i.price)} ریال | سفارش ${fa(i.qty)}</span></span><input id="rq${n}" inputmode="numeric" style="width:80px" value="${i.qty}" oninput="recvSum('${id}')"></div>`).join('')+`<div class="row"><b>مبلغ قابل کسر از صندوق</b><b id="rt">${fa(o.total)}</b></div><div class="m">موجودی نقدی: ${fa(cash())} ریال</div><div class="btns"><button class="b" onclick="doRecv('${id}')">تأیید دریافت</button><button class="b o" onclick="closeM()">انصراف</button></div>`)}
+  open(`<h3 style="margin:0">دریافت کالا: ${esc(o.no)}</h3><p class="m">تعداد واقعی دریافتی هر کتاب را وارد کنید. کتاب‌هایی که نرسیده را صفر بگذارید.</p>`+o.items.map((i,n)=>`<div class="row" style="margin:6px 0"><span>${esc(i.name)}<br><span class="m">${fa(i.price)} تومان | سفارش ${fa(i.qty)}</span></span><input id="rq${n}" inputmode="numeric" style="width:80px" value="${i.qty}" oninput="recvSum('${id}')"></div>`).join('')+`<div class="row"><b>مبلغ قابل کسر از صندوق</b><b id="rt">${fa(o.total)}</b></div><div class="m">موجودی نقدی: ${fa(cash())} تومان</div><div class="btns"><button class="b" onclick="doRecv('${id}')">تأیید دریافت</button><button class="b o" onclick="closeM()">انصراف</button></div>`)}
 function recvItems(o){return o.items.map((i,n)=>({id:i.id,name:i.name,price:i.price,qty:num($('#rq'+n).value)})).filter(i=>i.qty>0)}
 function recvSum(id){$('#rt').textContent=fa(recvItems(pget(id)).reduce((a,i)=>a+i.qty*i.price,0))}
 function doRecv(id){const o=pget(id),rec=recvItems(o),t=rec.reduce((a,i)=>a+i.qty*i.price,0);
@@ -351,7 +350,8 @@ const XT='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 function xlsxOut(aoa,name){const wb=XLSX.utils.book_new();aoa.forEach(([n,a])=>XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(a),n));wb.Workbook={Views:[{RTL:true}]};
   outFile(new Blob([XLSX.write(wb,{bookType:'xlsx',type:'array'})],{type:XT}),name,XT)}
 const noX=()=>{if(window.XLSX)return false;toast('کتابخانه اکسل بارگذاری نشد. اینترنت را بررسی کنید.');return true};
-function tplXlsx(){if(noX())return;xlsxOut([['نشریات',[['نام نشریه','شرح','قیمت (ریال)','موجودی','حداقل موجودی'],['کتاب بزرگ','متن اصلی برنامه',3000000,10,5],['نمونه دوم','',1000000,20,8]]]],'aa-template.xlsx')}
+function tplXlsx(){if(noX())return;xlsxOut([['نشریات',[['نام نشریه','شرح','قیمت (تومان)','موجودی','حداقل موجودی'],['کتاب بزرگ','متن اصلی برنامه',3000000,10,5],['نمونه دوم','',1000000,20,8]]]],'aa-template.xlsx')}
+function expList(){if(noX())return;xlsxOut([['نشریات',[['نام نشریه','شرح','قیمت (تومان)','موجودی','حداقل موجودی']].concat(S.books.map(b=>[b.name,b.desc,b.price,0,b.min]))]],'aa-publications-list.xlsx')}
 let pendX=null;
 function impXlsx(i){const f=i.files[0];i.value='';if(!f||noX())return;const r=new FileReader();
   r.onload=()=>{try{const wb=XLSX.read(r.result,{type:'array'}),a=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:''}),hd=a[0].map(String),ix=k=>hd.findIndex(x=>x.includes(k));
@@ -371,12 +371,12 @@ function rpSet(k){const t=jtoday().split('/');if(k==='all')rp={from:'',to:''};el
 function rptData(){const f=jk(rp.from),t=jk(rp.to),ok=k=>(!f||k>=f)&&(!t||k<=t);
   const ss=S.sales.filter(s=>ok(jk(s.date))),pp=S.purch.filter(o=>o.status==='received'&&ok(jk(o.rdate)));
   const by={};ss.forEach(s=>s.items.forEach(i=>{const e=by[i.name]=by[i.name]||{q:0,v:0};e.q+=i.qty;e.v+=i.qty*i.price}));
-  return{ss,pp,by,st:ss.reduce((a,s)=>a+s.total,0),pt:pp.reduce((a,o)=>a+o.rtotal,0)}}
+  return{ss,pp,by,st:ss.reduce((a,s)=>a+s.total,0),pt:pp.reduce((a,o)=>a+o.rtotal,0),sq:ss.reduce((a,s)=>a+s.items.reduce((x,i)=>x+i.qty,0),0),pq:pp.reduce((a,o)=>a+o.rec.reduce((x,i)=>x+i.qty,0),0)}}
 function rptCard(){const r=rptData();
   return `<div class="card"><div class="t">گزارش بازه زمانی</div><div class="m">تاریخ شمسی را مثل 1405/08/01 بنویسید. خالی یعنی بدون محدودیت.</div>
   <div class="row" style="gap:8px"><div style="flex:1"><label>از تاریخ</label><input dir="ltr" value="${esc(rp.from)}" oninput="rp.from=this.value"></div><div style="flex:1"><label>تا تاریخ</label><input dir="ltr" value="${esc(rp.to)}" oninput="rp.to=this.value"></div></div>
   <div class="btns"><button class="b" onclick="render()">نمایش</button><button class="b o" onclick="rpSet('today')">امروز</button><button class="b o" onclick="rpSet('month')">این ماه</button><button class="b o" onclick="rpSet('all')">همه</button></div>
-  <div class="row" style="margin-top:8px"><span>تعداد فاکتور</span><b>${fa(r.ss.length)}</b></div><div class="row"><span>جمع فروش</span><b>${fa(r.st)} ریال</b></div><div class="row"><span>جمع خریدهای دریافت‌شده</span><b>${fa(r.pt)} ریال</b></div>
+  <div class="row" style="margin-top:8px"><span>تعداد فاکتور</span><b>${fa(r.ss.length)}</b></div><div class="row"><span>جمع تعداد نشریه فروخته‌شده</span><b>${fa(r.sq)}</b></div><div class="row"><span>جمع فروش</span><b>${fa(r.st)} تومان</b></div><div class="row"><span>جمع تعداد نشریه خریداری‌شده</span><b>${fa(r.pq)}</b></div><div class="row"><span>جمع خریدهای دریافت‌شده</span><b>${fa(r.pt)} تومان</b></div>
   ${Object.keys(r.by).length?'<table><tr><th>نشریه</th><th>تعداد</th><th>مبلغ</th></tr>'+Object.entries(r.by).map(([n,e])=>`<tr><td>${esc(n)}</td><td>${fa(e.q)}</td><td>${fa(e.v)}</td></tr>`).join('')+'</table>':''}
   <div class="btns"><button class="b" onclick="expXlsx()">خروجی اکسل</button></div></div>`}
 function expXlsx(){if(noX())return;const r=rptData();
@@ -384,7 +384,7 @@ function expXlsx(){if(noX())return;const r=rptData();
   r.ss.forEach(s=>s.items.forEach(i=>sl.push([s.no,s.date,(s.buyer||{}).name,(s.buyer||{}).phone,i.name,i.qty,i.price,i.qty*i.price])));
   r.pp.forEach(o=>o.rec.forEach(i=>pl.push([o.no,o.rdate,i.name,i.qty,i.price,i.qty*i.price])));
   S.books.forEach(b=>bl.push([b.name,b.price,b.stock,b.stock*b.price,b.min]));
-  xlsxOut([['خلاصه',[['گزارش نشریات انجمن الکلی‌های گمنام'],['از تاریخ',rp.from||'ابتدا'],['تا تاریخ',rp.to||'امروز'],[],['تعداد فاکتور',r.ss.length],['جمع فروش (ریال)',r.st],['تعداد خرید دریافت‌شده',r.pp.length],['جمع خرید (ریال)',r.pt],['موجودی صندوق فعلی (ریال)',cash()],['ارزش انبار فعلی (ریال)',inv()],['تنخواه اولیه (ریال)',S.start]]],['فروش‌ها',sl],['خریدها',pl],['موجودی',bl]],'aa-report-'+(rp.from||'start').replace(/\//g,'-')+'_'+(rp.to||'now').replace(/\//g,'-')+'.xlsx')}
+  xlsxOut([['خلاصه',[['گزارش نشریات انجمن الکلی‌های گمنام'],['از تاریخ',rp.from||'ابتدا'],['تا تاریخ',rp.to||'امروز'],[],['تعداد فاکتور',r.ss.length],['جمع تعداد نشریه فروخته‌شده',r.sq],['جمع فروش (تومان)',r.st],['تعداد خرید دریافت‌شده',r.pp.length],['جمع تعداد نشریه خریداری‌شده',r.pq],['جمع خرید (تومان)',r.pt],['موجودی نقدی اول دوره (تومان)',S.cash0||0],['موجودی صندوق فعلی (تومان)',cash()],['ارزش انبار فعلی (تومان)',inv()],['تنخواه اولیه (تومان)',S.start]]],['فروش‌ها',sl],['خریدها',pl],['موجودی',bl]],'aa-report-'+(rp.from||'start').replace(/\//g,'-')+'_'+(rp.to||'now').replace(/\//g,'-')+'.xlsx')}
 
 const TS=[
 {t:'خوش آمدید',x:'این برنامه موجودی نشریات، فروش، خرید و صندوق را برایتان نگه می‌دارد. در چند دقیقه یاد می‌گیرید چطور از آن استفاده کنید. هر وقت خواستید «خروج» را بزنید. با ورق زدن به چپ و راست یا دکمه‌ها بین مرحله‌ها حرکت کنید.'},
@@ -395,7 +395,7 @@ const TS=[
 {t:'ارسال فاکتور',tab:'invoices',x:'بعد از صدور، فاکتور باز می‌شود. «ارسال متن» را بزنید تا خریدار بتواند شماره کارت را کپی کند. «عکس» و «PDF» هم هست. فهرست پیام‌رسان‌ها باز می‌شود و هر کدام را بخواهید انتخاب می‌کنید.'},
 {t:'درخواست خرید',tab:'purchase',x:'در تب «خرید»، نشریه‌هایی را که می‌خواهید سفارش دهید انتخاب کنید و «صدور درخواست خرید» را بزنید. جمع درخواست نمی‌تواند از موجودی نقدی صندوق بیشتر باشد. تا قبل از دریافت کالا می‌توانید آن را اصلاح یا لغو کنید و برای دفتر مرکزی بفرستید.'},
 {t:'دریافت کالا',tab:'purchase',x:'وقتی کتاب‌ها رسید، «دریافت کالا» را بزنید. تعداد واقعی دریافتی را بنویسید (برای نرسیده‌ها صفر). با تأیید، موجودی بالا می‌رود و مبلغ آن از صندوق کم می‌شود.'},
-{t:'گزارش',tab:'report',x:'در تب «گزارش» موجودی صندوق، ارزش انبار و تنخواه اولیه را می‌بینید. برای هر بازه زمانی (مثلاً این ماه) گزارش بگیرید و با «خروجی اکسل» ذخیره کنید.'},
+{t:'گزارش',tab:'report',x:'در تب «گزارش» موجودی صندوق، ارزش انبار و تنخواه اولیه را می‌بینید. اگر از قبل پول نقد دارید، در «موجودی نقدی اول دوره» ثبت کنید. برای هر بازه زمانی (مثلاً این ماه) گزارش بگیرید و با «خروجی اکسل» ذخیره کنید.'},
 {t:'همگام‌سازی با بازو',tab:'settings',x:'در «تنظیمات»، «ارسال تغییرات» را بزنید و فایل را برای بازوی نشریات بفرستید. او آن را دریافت و «ادغام» می‌کند. فاکتورهای هر دو نفر کنار هم ثبت می‌شود. «جایگزینی کامل» فقط برای بار اول روی گوشی جدید است.'},
 {t:'حفظ اطلاعات و پایان',x:'اطلاعات فقط روی همین گوشی است. اگر برنامه حذف شود یا گوشی عوض شود، از بین می‌رود. هر چند وقت «ارسال تغییرات» را بزنید و فایل را نزد خودتان نگه دارید. با 🎨 تم برنامه را عوض کنید و با «؟» بالای صفحه هر وقت خواستید راهنما را ببینید. موفق باشید.'}];
 let ti=0,tab0='books',tx0=null;
@@ -411,7 +411,7 @@ const PH={books:'فهرست نشریات و موجودی آن‌هاست. کار
 sale:'نام و تلفن خریدار الزامی است. نشریه‌ها را انتخاب کنید و فاکتور صادر کنید. تعداد بیشتر از موجودی قابل انتخاب نیست.',
 purchase:'درخواست خرید بسازید، تا قبل از دریافت اصلاحش کنید و بعد «دریافت کالا» بزنید. مبلغ دریافتی از صندوق کم می‌شود و نمی‌تواند از موجودی صندوق بیشتر باشد.',
 invoices:'فهرست فاکتورهای صادرشده. روی هر کدام بزنید تا ببینید و دوباره بفرستید.',
-report:'وضعیت صندوق و انبار، گزارش بازه زمانی و خروجی اکسل.',
+report:'وضعیت صندوق و انبار، موجودی نقدی اول دوره، گزارش بازه زمانی و خروجی اکسل.',
 settings:'اطلاعات فروشنده، ورود فهرست نشریات از اکسل، و همگام‌سازی با بازو.'};
 const HT=[['اولین بار چه کنم؟','۱) در «تنظیمات» اطلاعات خودتان را ثبت کنید. ۲) نشریات را وارد کنید (دستی یا با اکسل). ۳) تنخواه اولیه را در «گزارش» بررسی کنید. حالا آماده فروش هستید.'],
 ['ثبت یک فروش','در تب «فروش» نام و تلفن خریدار را بنویسید، نشریه‌ها را انتخاب کنید و «صدور فاکتور» را بزنید.'],
@@ -431,7 +431,7 @@ function editBook(id){
   open(`<h3 style="margin:0">${id?'ویرایش کتاب':'کتاب جدید'}</h3>
   <label>نام کتاب</label><input id="f1" value="${esc(b.name)}">
   <label>شرح</label><textarea id="f2" rows="2">${esc(b.desc)}</textarea>
-  <label>قیمت (ریال)</label><input id="f3" inputmode="numeric" value="${b.price}">
+  <label>قیمت (تومان)</label><input id="f3" inputmode="numeric" value="${b.price}">
   <label>موجودی</label><input id="f4" inputmode="numeric" value="${b.stock}">
   <label>حداقل موجودی (نقطه سفارش)</label><input id="f5" inputmode="numeric" value="${b.min}">
   <div class="btns"><button class="b" onclick="saveBook('${id}')">ذخیره</button><button class="b o" onclick="closeM()">انصراف</button>${id?`<button class="b r" onclick="delBook('${id}')">حذف</button>`:''}</div>`);
@@ -450,8 +450,12 @@ function restock(id){
   <div class="btns"><button class="b" onclick="doRestock('${id}')">افزودن به انبار</button><button class="b o" onclick="closeM()">انصراف</button></div>`);
 }
 function doRestock(id){const n=num($('#f1').value);if(!n){$('#f1').focus();return}S.books.find(x=>x.id===id).rs.push({k:rid('r'),q:n,t:Date.now()});save();closeM();render()}
+function editCash0(){
+  open(`<h3 style="margin:0">موجودی نقدی اول دوره</h3><div class="m">پول نقدی که از فروش‌های قبل دارید و قبل از شروع ثبت در برنامه، در صندوق بوده است. به موجودی صندوق و سقف خرید اضافه می‌شود.</div><label>مبلغ (تومان)</label><input id="f1" inputmode="numeric" value="${S.cash0||0}">
+  <div class="btns"><button class="b" onclick="S.cash0=num($('#f1').value);S.cash0T=Date.now();save();closeM();render()">ذخیره</button><button class="b o" onclick="closeM()">انصراف</button></div>`);
+}
 function editStart(){
-  open(`<h3 style="margin:0">تنخواه اولیه</h3><label>مبلغ (ریال)</label><input id="f1" inputmode="numeric" value="${S.start}">
+  open(`<h3 style="margin:0">تنخواه اولیه</h3><label>مبلغ (تومان)</label><input id="f1" inputmode="numeric" value="${S.start}">
   <div class="btns"><button class="b" onclick="S.start=num($('#f1').value);S.startT=Date.now();save();closeM();render()">ذخیره</button><button class="b o" onclick="closeM()">انصراف</button></div>`);
 }
 function resetAll(){if(!confirm('همه کتاب‌ها و فاکتورها پاک شود؟'))return;S={books:[],sales:[],start:0,seq:1,bid:1,seller:S.seller};cart={};save();render()}
